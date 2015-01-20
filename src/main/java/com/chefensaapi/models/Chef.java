@@ -3,44 +3,44 @@ package com.chefensaapi.models;
 
 public class Chef {
 	
-	private long chefId;
-	private String chefName;
-	private int gender; 			//
+	private long id;
+	private String name;
+	private int gender;
 	private String phoneNumber;
-	private String emailId;
-	private long addressId;			//
-	private String chefImageUrl;	//
-	private String chefDescription;
+	private String email;
+	private long addressId;
+	private String imageUrl;
+	private String description;
 	private String languages;
-	private int maritalStatus;		//
+	private int maritalStatus;
 	private String ethnicity;
 	private int chefCategory;
-	private int mealCategory;			//veg/non veg/egg
-	private String workingDays;		//
-	private int workingTime;		//
+	private int mealCategory;
+	private String workingDays;
+	private int workingTime;
 	private String mealTypes;
-	private String chefSpeciality;
-	private String chefRating;
-	private int capacity;			//number of meals each time
-	private int experience;			//experience with chefensa
+	private String speciality;
+	private String rating;
+	private int capacity;
+	private int experience;
 	private long createTime;
 	
-	public Chef(long chefId, String chefName, int gender, String phoneNumber,
-			String emailId, long addressId, String chefImageUrl,
-			String chefDescription, String languages, int maritalStatus,
+	public Chef(long id, String name, int gender, String phoneNumber,
+			String email, long addressId, String imageUrl,
+			String description, String languages, int maritalStatus,
 			String ethnicity, int chefCategory, int mealCategory,
 			String workingDays, int workingTime, String mealTypes,
-			String chefSpeciality, String chefRating, int capacity,
+			String speciality, String rating, int capacity,
 			int experience, long createTime) {
 		super();
-		this.chefId = chefId;
-		this.chefName = chefName;
+		this.id = id;
+		this.name = name;
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
-		this.emailId = emailId;
+		this.email = email;
 		this.addressId = addressId;
-		this.chefImageUrl = chefImageUrl;
-		this.chefDescription = chefDescription;
+		this.imageUrl = imageUrl;
+		this.description = description;
 		this.languages = languages;
 		this.maritalStatus = maritalStatus;
 		this.ethnicity = ethnicity;
@@ -49,27 +49,27 @@ public class Chef {
 		this.workingDays = workingDays;
 		this.workingTime = workingTime;
 		this.mealTypes = mealTypes;
-		this.chefSpeciality = chefSpeciality;
-		this.chefRating = chefRating;
+		this.speciality = speciality;
+		this.rating = rating;
 		this.capacity = capacity;
 		this.experience = experience;
 		this.createTime = createTime;
 	}
 	
-	public Chef(String chefName, int gender, String phoneNumber,
-			String emailId, long addressId, String chefImageUrl,
-			String chefDescription, String languages, int maritalStatus,
+	public Chef(String name, int gender, String phoneNumber,
+			String email, long addressId, String imageUrl,
+			String description, String languages, int maritalStatus,
 			String ethnicity, int chefCategory, int mealCategory,
 			String workingDays, int workingTime, String mealTypes,
-			String chefSpeciality, int capacity) {
+			String speciality, int capacity) {
 		super();
-		this.chefName = chefName;
+		this.name = name;
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
-		this.emailId = emailId;
+		this.email = email;
 		this.addressId = addressId;
-		this.chefImageUrl = chefImageUrl;
-		this.chefDescription = chefDescription;
+		this.imageUrl = imageUrl;
+		this.description = description;
 		this.languages = languages;
 		this.maritalStatus = maritalStatus;
 		this.ethnicity = ethnicity;
@@ -78,21 +78,21 @@ public class Chef {
 		this.workingDays = workingDays;
 		this.workingTime = workingTime;
 		this.mealTypes = mealTypes;
-		this.chefSpeciality = chefSpeciality;
+		this.speciality = speciality;
 		this.capacity = capacity;
 	}
 	
-	public long getChefId() {
-		return chefId;
+	public long getId() {
+		return id;
 	}
-	public void setChefId(long chefId) {
-		this.chefId = chefId;
+	public void setId(long id) {
+		this.id = id;
 	}
-	public String getChefName() {
-		return chefName;
+	public String getName() {
+		return name;
 	}
-	public void setChefName(String chefName) {
-		this.chefName = chefName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getGender() {
 		return gender;
@@ -106,11 +106,11 @@ public class Chef {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public long getAddressId() {
 		return addressId;
@@ -118,17 +118,17 @@ public class Chef {
 	public void setAddressId(long addressId) {
 		this.addressId = addressId;
 	}
-	public String getChefImageUrl() {
-		return chefImageUrl;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setChefImageUrl(String chefImageUrl) {
-		this.chefImageUrl = chefImageUrl;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
-	public String getChefDescription() {
-		return chefDescription;
+	public String getDescription() {
+		return description;
 	}
-	public void setChefDescription(String chefDescription) {
-		this.chefDescription = chefDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getLanguages() {
 		return languages;
@@ -178,17 +178,17 @@ public class Chef {
 	public void setMealTypes(String mealTypes) {
 		this.mealTypes = mealTypes;
 	}
-	public String getChefSpeciality() {
-		return chefSpeciality;
+	public String getSpeciality() {
+		return speciality;
 	}
-	public void setChefSpeciality(String chefSpeciality) {
-		this.chefSpeciality = chefSpeciality;
+	public void setSpeciality(String speciality) {
+		this.speciality = speciality;
 	}
-	public String getChefRating() {
-		return chefRating;
+	public String getRating() {
+		return rating;
 	}
-	public void setChefRating(String chefRating) {
-		this.chefRating = chefRating;
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 	public int getCapacity() {
 		return capacity;

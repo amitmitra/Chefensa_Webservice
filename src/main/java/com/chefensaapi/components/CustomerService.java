@@ -6,19 +6,16 @@ import org.springframework.stereotype.Component;
 
 import com.chefensaapi.components.interfaces.ICustomerService;
 import com.chefensaapi.dao.CustomerDao;
-import com.chefensaapi.dao.implementations.JdbcCustomerDao;
 import com.chefensaapi.models.Customer;
 
 @Component
 public class CustomerService implements ICustomerService {
 
 	public Customer getCustomerCompleteDetail(long customerId) {
-		Customer customer = new Customer();
 		ApplicationContext context = 
 	    		new ClassPathXmlApplicationContext("Spring-Module.xml");
 		CustomerDao customerDao= (CustomerDao) context.getBean("customerDao");
-		customer= customerDao.getCustomerInfo(customerId);
-		return customer;
+		return customerDao.getCustomerInfo(customerId);
 	}
 
 	public int createCustomerEntry(Customer entity) {

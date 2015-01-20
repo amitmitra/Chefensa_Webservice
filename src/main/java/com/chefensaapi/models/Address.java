@@ -8,13 +8,16 @@ public class Address {
 	private String city;
 	private String locality;
 	private String pin;
-	private String initialAddress;
+	private String streetName;
+	private String buildingName;
+	private String flatNumber;
 	private String landmark;
 	private String coordinates;
 	
 	public Address(long id, String country, String state, String city,
-			String locality, String pin, String initialAddress,
-			String landmark, String coordinates) {
+			String locality, String pin, String streetName,
+			String buildingName, String flatNumber, String landmark,
+			String coordinates) {
 		super();
 		this.id = id;
 		this.country = country;
@@ -22,21 +25,39 @@ public class Address {
 		this.city = city;
 		this.locality = locality;
 		this.pin = pin;
-		this.initialAddress = initialAddress;
+		this.streetName = streetName;
+		this.buildingName = buildingName;
+		this.flatNumber = flatNumber;
 		this.landmark = landmark;
 		this.coordinates = coordinates;
 	}
-	
-	public Address(String country, String state, String city,
-			String locality, String pin, String initialAddress,
-			String landmark) {
+	public Address(String country, String state, String city, String locality,
+			String pin, String streetName, String buildingName,
+			String flatNumber, String landmark, String coordinates) {
 		super();
 		this.country = country;
 		this.state = state;
 		this.city = city;
 		this.locality = locality;
 		this.pin = pin;
-		this.initialAddress = initialAddress;
+		this.streetName = streetName;
+		this.buildingName = buildingName;
+		this.flatNumber = flatNumber;
+		this.landmark = landmark;
+		this.coordinates = coordinates;
+	}
+	public Address(String country, String state, String city, String locality,
+			String pin, String streetName, String buildingName,
+			String flatNumber, String landmark) {
+		super();
+		this.country = country;
+		this.state = state;
+		this.city = city;
+		this.locality = locality;
+		this.pin = pin;
+		this.streetName = streetName;
+		this.buildingName = buildingName;
+		this.flatNumber = flatNumber;
 		this.landmark = landmark;
 	}
 	
@@ -76,11 +97,23 @@ public class Address {
 	public void setPin(String pin) {
 		this.pin = pin;
 	}
-	public String getInitialAddress() {
-		return initialAddress;
+	public String getStreetName() {
+		return streetName;
 	}
-	public void setInitialAddress(String initialAddress) {
-		this.initialAddress = initialAddress;
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+	public String getBuildingName() {
+		return buildingName;
+	}
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+	public String getFlatNumber() {
+		return flatNumber;
+	}
+	public void setFlatNumber(String flatNumber) {
+		this.flatNumber = flatNumber;
 	}
 	public String getLandmark() {
 		return landmark;

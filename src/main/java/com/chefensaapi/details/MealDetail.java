@@ -4,20 +4,22 @@ public class MealDetail {
 
 	private long mealId;
 	private String mealName;
-	private String mealComponents;
+	private String mealContent;
 	private String mealDescription;
 	private String mealType;
 	private int mealCategory;
 	private String mealNote;
 	private String mealNutrients;
 	private String mealImageUrl;
+	private String chefName;
+	private String chefImageUrl;
 	private long chefId;
 	private int spicyness;
 	private int mealPrice;
-	private long totalMealsOrdered;
-	private long totalRating;
-	private long numberOfUsers;
-	private String menuDate;
+	private float rating;
+	private String mealDate;
+	private String mealTime;
+	private int mealQuantity;
 	private int availability;
 	
 	public long getMealId() {
@@ -32,11 +34,11 @@ public class MealDetail {
 	public void setMealName(String mealName) {
 		this.mealName = mealName;
 	}
-	public String getMealComponents() {
-		return mealComponents;
+	public String getMealContent() {
+		return mealContent;
 	}
-	public void setMealComponents(String mealComponents) {
-		this.mealComponents = mealComponents;
+	public void setMealContent(String mealContent) {
+		this.mealContent = mealContent;
 	}
 	public String getMealDescription() {
 		return mealDescription;
@@ -74,6 +76,18 @@ public class MealDetail {
 	public void setMealImageUrl(String mealImageUrl) {
 		this.mealImageUrl = mealImageUrl;
 	}
+	public String getChefName() {
+		return chefName;
+	}
+	public void setChefName(String chefName) {
+		this.chefName = chefName;
+	}
+	public String getChefImageUrl() {
+		return chefImageUrl;
+	}
+	public void setChefImageUrl(String chefImageUrl) {
+		this.chefImageUrl = chefImageUrl;
+	}
 	public long getChefId() {
 		return chefId;
 	}
@@ -92,29 +106,29 @@ public class MealDetail {
 	public void setMealPrice(int mealPrice) {
 		this.mealPrice = mealPrice;
 	}
-	public long getTotalMealsOrdered() {
-		return totalMealsOrdered;
+	public float getRating() {
+		return rating;
 	}
-	public void setTotalMealsOrdered(long totalMealsOrdered) {
-		this.totalMealsOrdered = totalMealsOrdered;
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
-	public long getTotalRating() {
-		return totalRating;
+	public String getMealDate() {
+		return mealDate;
 	}
-	public void setTotalRating(long totalRating) {
-		this.totalRating = totalRating;
+	public void setMealDate(String mealDate) {
+		this.mealDate = mealDate;
 	}
-	public long getNumberOfUsers() {
-		return numberOfUsers;
+	public String getMealTime() {
+		return mealTime;
 	}
-	public void setNumberOfUsers(long numberOfUsers) {
-		this.numberOfUsers = numberOfUsers;
+	public void setMealTime(String mealTime) {
+		this.mealTime = mealTime;
 	}
-	public String getMenuDate() {
-		return menuDate;
+	public int getMealQuantity() {
+		return mealQuantity;
 	}
-	public void setMenuDate(String menuDate) {
-		this.menuDate = menuDate;
+	public void setMealQuantity(int mealQuantity) {
+		this.mealQuantity = mealQuantity;
 	}
 	public int getAvailability() {
 		return availability;
@@ -122,4 +136,5 @@ public class MealDetail {
 	public void setAvailability(int availability) {
 		this.availability = availability;
 	}
+	
 }

@@ -1,8 +1,13 @@
 package com.chefensaapi.dao.implementations;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.chefensaapi.dao.OrderDao;
 import com.chefensaapi.models.Order;
@@ -13,28 +18,15 @@ public class JdbcOrderDao implements OrderDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
+	public final String TABLE_ORDER="order";
 	public final String ORDER_ID="orderId";
 	public final String CUSTOMER_ID="customerId";
 	public final String MEAL_ID="mealId";
-	public final String CUSTOMER_NAME="customerName";
-	public final String ORDER_ADDRESS="orderAddress";
-	public final String ORDER_PHONE="orderPhone";
-	public final String CHEF_ID="chefId";
-	public final String ORDER_COST="orderCost";
+	public final String ADDRESS_ID="addressId";
+	public final String ORDER_DATE="orderDate";
 	public final String ORDER_TIME="orderTime";
-	
-	public final String INSERT_SQL = "insert into OrderPlaced (" +  
-			CUSTOMER_ID + ", " +
-			MEAL_ID + ", " +
-			CUSTOMER_NAME + ", " +
-			ORDER_ADDRESS + ", " +
-			ORDER_PHONE + ", " +
-			CHEF_ID + ", " +
-			ORDER_COST + ", " +
-			ORDER_TIME + ") " +
-			"values ( ? , ? , ? , ? , ? , ? , ? , ? )";
-	
-	
+	public final String MEAL_QUANTITY="mealQuantity";
+	public final String STATUS="status";
 	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;	
@@ -42,34 +34,60 @@ public class JdbcOrderDao implements OrderDao {
 	}
 	
 	public int createOrder(Order order) {
+		
+	final String INSERT_SQL = "insert into" + TABLE_ORDER +  "(" +
+				ORDER_ID + ", " +
+				CUSTOMER_ID + ", " +
+				MEAL_ID + ", " +
+				ADDRESS_ID + ", " +
+				ORDER_DATE + ", " +
+				ORDER_TIME + ", " +
+				MEAL_QUANTITY + ", " + 
+				STATUS + ",) values ( ? , ? , ? , ? , ? , ? , ? , ? )";
+		
 		Object[] params = new Object[]{
+				order.getOrderId(),
 				order.getCustomerId(),
 				order.getMealId(),
-				order.getCustomerName(),
-				order.getOrderAddress(),
-				order.getOrderPhone(),
-				order.getChefId(),
-				order.getOrderCost(),
-				order.getOrderTime()
+				order.getAddressId(),
+				order.getOrderDate(),
+				order.getOrderTime(),
+				order.getMealQuantity(),
+				order.getStatus()
 		};
 		
-		
-//[insert into Customer (customer_name, deviceId, gender, mealType, primaryPhoneNo, secondaryPhoneNo, primaryEmailId, secondaryEmailId, primaryAddress, secondaryAddress, cuisinePreference, spicinessPreference, profileImageUrl, totalHitsOnApp, totalOrdersPlaced, dateOfBirth)  values ( ? , ? , ? , ? , ? , ? , ? , ?, ? ,? , ? , ?, ? , ? , ? , ? )]	
-//[insert into Order (customerId, mealId, customerName, orderAddress, orderPhone, chefId, orderCost, orderTime) values ( ? , ? , ? , ? , ? , ? , ? , ? )]		
-		/*{
-	"orderId": "1",
-	"customerId": "1",
-	"mealId": "1",
-	"chefId": "1",
-	"customerName": "harsh",
-	"orderCost": "20",
-	"orderAddress": "gfdsa",
-	"orderPhone": "12345",
-	"orderTime": "12345"
-	}*/
 		int response = jdbcTemplate.update(INSERT_SQL, params);
-		//int response1 = jdbcTemplate.update("insert into chefensa.`Order` (customerId, mealId, customerName, orderAddress, orderPhone, chefId, orderCost, orderTime) values (1, 12 ,22, 234, 234 , 21 , 20 , 23 )");
 		return response;
+	}
+
+	@Override
+	public List<Order> getOrder(long customerId, String date) {
+		String sql = "select * from " + TABLE_ORDER + " where " + CUSTOMER_ID
+				+ " = ? and " + ORDER_DATE + " = ?";
+		List<Order> orders = jdbcTemplate.query(sql, new Object[] { customerId,
+				date }, new OrderRowMapper());
+		return orders;
+	}
+
+	@Override
+	public Order getOrder(long customerId, String date, String time) {
+		String sql = "select * from " + TABLE_ORDER + " where " + CUSTOMER_ID
+				+ " = ? and " + ORDER_DATE + " = ? and " + ORDER_TIME + " = ?";
+		Order order = jdbcTemplate.queryForObject(sql, new Object[] {
+				customerId, date }, new OrderRowMapper());
+		return order;
+	}
+	
+	public class OrderRowMapper implements RowMapper<Order> {
+		@Override
+		public Order mapRow(ResultSet rs, int arg1) throws SQLException {
+			Order order = new Order(rs.getLong(ORDER_ID),
+					rs.getLong(CUSTOMER_ID), rs.getLong(ADDRESS_ID),
+					rs.getString(ORDER_DATE), rs.getString(ORDER_TIME),
+					rs.getString(MEAL_ID), rs.getString(MEAL_QUANTITY),
+					rs.getInt(STATUS));
+			return order;
+		}
 	}
 
 }

@@ -3,29 +3,35 @@ package com.chefensaapi.models;
 public class Order {
 
 	private long orderId;
-	
 	private long customerId;
-	
-	private long mealId;
-	
-	private long chefId;
-	
-	private String customerName;
-	
-	private int orderCost;
-	
-	private String orderAddress;
-	
-	private String orderPhone;
-	
+	private long addressId;
+	private String orderDate;
 	private String orderTime;
-
-	public String getOrderTime() {
-		return orderTime;
+	private String mealId;
+	private String mealQuantity;
+	private int status;
+	
+	public Order(long orderId, long customerId, long addressId,
+			String orderDate, String orderTime, String mealId, String mealQuantity, int status) {
+		this.orderId = orderId;
+		this.customerId = customerId;
+		this.addressId = addressId;
+		this.orderDate = orderDate;
+		this.orderTime = orderTime;
+		this.mealId = mealId;
+		this.mealQuantity = mealQuantity;
+		this.status = status;
 	}
 
-	public void setOrderTime(String orderTime) {
+	public Order(long customerId, long addressId,
+			String orderDate, String orderTime, String mealId, String mealQuantity, int status) {
+		this.customerId = customerId;
+		this.addressId = addressId;
+		this.orderDate = orderDate;
 		this.orderTime = orderTime;
+		this.mealId = mealId;
+		this.mealQuantity = mealQuantity;
+		this.status = status;
 	}
 
 	public long getOrderId() {
@@ -44,51 +50,52 @@ public class Order {
 		this.customerId = customerId;
 	}
 
-	public long getMealId() {
+	public long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(long addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
+	
+	public String getMealId() {
 		return mealId;
 	}
 
-	public void setMealId(long mealId) {
+	public void setMealId(String mealId) {
 		this.mealId = mealId;
 	}
 
-	public long getChefId() {
-		return chefId;
+	public String getMealQuantity() {
+		return mealQuantity;
 	}
 
-	public void setChefId(long chefId) {
-		this.chefId = chefId;
+	public void setMealQuantity(String mealQuantity) {
+		this.mealQuantity = mealQuantity;
 	}
 
-	public String getCustomerName() {
-		return customerName;
+	public int getStatus() {
+		return status;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	public int getOrderCost() {
-		return orderCost;
-	}
-
-	public void setOrderCost(int orderCost) {
-		this.orderCost = orderCost;
-	}
-
-	public String getOrderAddress() {
-		return orderAddress;
-	}
-
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
-	}
-
-	public String getOrderPhone() {
-		return orderPhone;
-	}
-
-	public void setOrderPhone(String orderPhone) {
-		this.orderPhone = orderPhone;
-	}
 }

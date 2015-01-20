@@ -12,7 +12,7 @@ import com.chefensaapi.models.Order;
 
 @Component
 public class OrderService implements IOrderService {
-	//hello
+
 	public int createOrder(Order order) {
 		ApplicationContext context = 
 	    		new ClassPathXmlApplicationContext("Spring-Module.xml");

@@ -33,14 +33,14 @@ public class JdbcMealDao implements MealDao {
 	public final String MEAL_CHEF_ID = "chefId";
 	public final String MEAL_SPICINESS = "spicyness";
 	public final String MEAL_PRICE = "mealPrice";
+	public final String MEAL_RATING = "rating";
 	public final String MEAL_TOTAL_ORDERED = "totalMealsOrdered";
-	public final String MEAL_TOTAL_RATING = "totalRating";
-	public final String MEAL_TOTAL_USERS = "numberOfUsers";
 
 	public final String MENU_TABLE = "menu";
-	public final String MENU_ID = "menuId";
 	public final String MENU_MEAL_ID = "mealId";
-	public final String MENU_DATE = "menuDate";
+	public final String MENU_MEAL_DATE = "mealDate";
+	public final String MENU_MEAL_TIME = "mealTime";
+	public final String MENU_MEAL_QUANTIRY = "mealQuantity";
 	public final String MENU_AVAILABILITY = "availability";
 
 	public void setDataSource(DataSource dataSource) {
@@ -73,9 +73,11 @@ public class JdbcMealDao implements MealDao {
 	public void addMenuInfo(Menu menu) {
 
 		String insetQuery = "insert into " + MENU_TABLE + "(" + MENU_MEAL_ID
-				+ ", " + MENU_DATE + ", " + MENU_AVAILABILITY
-				+ ") values (?,?,?)";
-		Object[] params = new Object[] { menu.getMealId(), menu.getMenuDate(),
+				+ ", " + MENU_MEAL_DATE + ", " + MENU_MEAL_TIME + ", "
+				+ MENU_MEAL_QUANTIRY + ", " + MENU_AVAILABILITY
+				+ ") values (?,?,?,?,?)";
+		Object[] params = new Object[] { menu.getMealId(), menu.getMealDate(),
+				menu.getMealTime(), menu.getMealQuantity(),
 				menu.getAvailability() };
 
 		jdbcTemplate.update(insetQuery, params);
@@ -84,7 +86,7 @@ public class JdbcMealDao implements MealDao {
 	public List<Meal> getMealOnDate(String date) {
 		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_ID
 				+ " in (select " + MENU_MEAL_ID + " from " + MENU_TABLE
-				+ " where " + MENU_DATE + " = ?";
+				+ " where " + MENU_MEAL_DATE + " = ?";
 
 		List<Meal> mealList = jdbcTemplate.query(sql, new Object[] { date },
 				new MealRowMapper());
@@ -101,7 +103,7 @@ public class JdbcMealDao implements MealDao {
 
 	@Override
 	public List<Menu> getMealAvailability(String date) {
-		String sql = "select * from " + MENU_TABLE + " where " + MENU_DATE
+		String sql = "select * from " + MENU_TABLE + " where " + MENU_MEAL_DATE
 				+ " = ?";
 		List<Menu> mealAvailabilityList = jdbcTemplate.query(sql,
 				new Object[] { date }, new MenuRowMapper());
@@ -117,21 +119,20 @@ public class JdbcMealDao implements MealDao {
 					rs.getString(MEAL_IMAGE_URL), rs.getString(MEAL_CHEF_NAME),
 					rs.getString(MEAL_CHEF_IMAGE_URL),
 					rs.getLong(MEAL_CHEF_ID), rs.getInt(MEAL_SPICINESS),
-					rs.getInt(MEAL_PRICE), rs.getLong(MEAL_TOTAL_ORDERED),
-					rs.getLong(MEAL_TOTAL_RATING), rs.getLong(MEAL_TOTAL_USERS));
+					rs.getInt(MEAL_PRICE), rs.getFloat(MEAL_RATING),
+					rs.getLong(MEAL_TOTAL_ORDERED));
 			return meal;
 		}
 	}
 
 	public class MenuRowMapper implements RowMapper<Menu> {
-
 		@Override
 		public Menu mapRow(ResultSet rs, int arg1) throws SQLException {
-			Menu menu = new Menu(rs.getLong(MENU_ID), rs.getLong(MENU_MEAL_ID),
-					rs.getString(MENU_DATE), rs.getInt(MENU_AVAILABILITY));
+			Menu menu = new Menu(rs.getLong(MENU_MEAL_ID),
+					rs.getString(MENU_MEAL_DATE), rs.getString(MENU_MEAL_TIME),
+					rs.getInt(MENU_MEAL_QUANTIRY), rs.getInt(MENU_AVAILABILITY));
 			return menu;
 		}
-
 	}
 
 }

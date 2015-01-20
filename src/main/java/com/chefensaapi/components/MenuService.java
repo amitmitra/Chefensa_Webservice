@@ -21,17 +21,23 @@ public class MenuService implements IMenuService {
 	MealDao mealDao = (MealDao)context.getBean("mealDao");
 	ChefDao chefDao = (ChefDao)context.getBean("chefDao");
 	
-	public void addMeal(MealDetail mealDetail){
-		
+	public void addMeal(MealDetail mealDetail) {
+
 		Chef chef = chefDao.getChefInfo(mealDetail.getChefId());
-		
-		Meal meal = new Meal(mealDetail.getMealName(), mealDetail.getMealComponents(), mealDetail.getMealDescription(), 
-				mealDetail.getMealType(), mealDetail.getMealCategory(), mealDetail.getMealNote(), mealDetail.getMealNutrients(), 
-				mealDetail.getMealImageUrl(), chef.getChefName(), chef.getChefImageUrl(), mealDetail.getChefId(), mealDetail.getSpicyness(),
-				mealDetail.getMealPrice());
+
+		Meal meal = new Meal(mealDetail.getMealName(),
+				mealDetail.getMealContent(), mealDetail.getMealDescription(),
+				mealDetail.getMealType(), mealDetail.getMealCategory(),
+				mealDetail.getMealNote(), mealDetail.getMealNutrients(),
+				mealDetail.getMealImageUrl(), chef.getName(),
+				chef.getImageUrl(), mealDetail.getChefId(),
+				mealDetail.getSpicyness(), mealDetail.getMealPrice(),
+				mealDetail.getRating());
 		long mealId = mealDao.addMealInfo(meal);
-		
-		Menu menu = new Menu(mealId, mealDetail.getMenuDate(), mealDetail.getAvailability());
+
+		Menu menu = new Menu(mealId, mealDetail.getMealDate(),
+				mealDetail.getMealTime(), mealDetail.getMealQuantity(),
+				mealDetail.getAvailability());
 		mealDao.addMenuInfo(menu);
 	}
 

@@ -7,13 +7,15 @@ public class ChefDetail {
 	private int gender;
 	private String phoneNumber;
 	private String emailId;
-	private String initialAddress;
+	private String flatNumber;
+	private String buildingName;
+	private String streetName;
 	private String locality;
 	private String city;
 	private String state;
 	private String pin;
 	private String landmark;
-	private String chefImageUrl;	//
+	private String chefImageUrl;
 	private String chefDescription;
 	private String languages;
 	private int maritalStatus;
@@ -57,11 +59,23 @@ public class ChefDetail {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public String getInitialAddress() {
-		return initialAddress;
+	public String getFlatNumber() {
+		return flatNumber;
 	}
-	public void setInitialAddress(String initialAddress) {
-		this.initialAddress = initialAddress;
+	public void setFlatNumber(String flatNumber) {
+		this.flatNumber = flatNumber;
+	}
+	public String getBuildingName() {
+		return buildingName;
+	}
+	public void setBuildingName(String buildingName) {
+		this.buildingName = buildingName;
+	}
+	public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
 	}
 	public String getLocality() {
 		return locality;

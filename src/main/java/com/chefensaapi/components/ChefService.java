@@ -33,8 +33,8 @@ public class ChefService implements IChefService {
 		for (Iterator<Chef> iterator = chefs.iterator(); iterator.hasNext();) {
 			Chef chef = iterator.next();
 			ChefDetail chefDetail = new ChefDetail();
-			chefDetail.setChefId(chef.getChefId());
-			chefDetail.setChefName(chef.getChefName());
+			chefDetail.setChefId(chef.getId());
+			chefDetail.setChefName(chef.getName());
 			chefDetails.add(chefDetail);
 		}
 		return chefDetails;
@@ -43,8 +43,8 @@ public class ChefService implements IChefService {
 	@Override
 	public long addChefDetail(ChefDetail chefDetail) {
 		
-		Address address = new Address("India", chefDetail.getState(), chefDetail.getCity(), chefDetail.getLocality(), 
-				chefDetail.getPin(), chefDetail.getInitialAddress(), chefDetail.getLandmark());
+		Address address = new Address("India", "Karnataka", "Bengaluru", chefDetail.getLocality(), 
+				chefDetail.getPin(), chefDetail.getStreetName(), chefDetail.getBuildingName(), chefDetail.getFlatNumber(), chefDetail.getLandmark());
 		
 		long addressId = addressDao.saveAddress(address);
 		

@@ -72,14 +72,14 @@ public class JdbcChefDao implements ChefDao {
 				+ CHEF_CAPACITY + ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		// define query arguments
-		final Object[] params = new Object[] {chef.getChefName(),
-				chef.getGender(), chef.getPhoneNumber(), chef.getEmailId(),
-				chef.getAddressId(), chef.getChefImageUrl(),
-				chef.getChefDescription(), chef.getLanguages(),
+		final Object[] params = new Object[] {chef.getName(),
+				chef.getGender(), chef.getPhoneNumber(), chef.getEmail(),
+				chef.getAddressId(), chef.getImageUrl(),
+				chef.getDescription(), chef.getLanguages(),
 				chef.getMaritalStatus(), chef.getEthnicity(),
 				chef.getChefCategory(), chef.getMealCategory(),
 				chef.getWorkingDays(), chef.getWorkingTime(),
-				chef.getMealTypes(), chef.getChefSpeciality(),
+				chef.getMealTypes(), chef.getSpeciality(),
 				chef.getCapacity()};
 		
 		jdbcTemplate.update(insertQuery, params);
