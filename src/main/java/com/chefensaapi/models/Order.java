@@ -10,7 +10,26 @@ public class Order {
 	private String mealId;
 	private String mealQuantity;
 	private int status;
+	private float rating;
+	private int panicButtonPressed;
 	
+	public Order(long orderId, long customerId, long addressId,
+			String orderDate, String orderTime, String mealId,
+			String mealQuantity, int status, float rating,
+			int panicButtonPressed) {
+		super();
+		this.orderId = orderId;
+		this.customerId = customerId;
+		this.addressId = addressId;
+		this.orderDate = orderDate;
+		this.orderTime = orderTime;
+		this.mealId = mealId;
+		this.mealQuantity = mealQuantity;
+		this.status = status;
+		this.rating = rating;
+		this.panicButtonPressed = panicButtonPressed;
+	}
+
 	public Order(long orderId, long customerId, long addressId,
 			String orderDate, String orderTime, String mealId, String mealQuantity, int status) {
 		this.orderId = orderId;
@@ -98,4 +117,19 @@ public class Order {
 		this.status = status;
 	}
 
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public int getPanicButtonPressed() {
+		return panicButtonPressed;
+	}
+
+	public void setPanicButtonPressed(int panicButtonPressed) {
+		this.panicButtonPressed = panicButtonPressed;
+	}
 }

@@ -17,13 +17,16 @@ public class Meal {
 	private int spicyness;
 	private int mealPrice;
 	private float rating;
-	private long totalMealsOrdered;
+	private String mealDate;
+	private int mealTime;
+	private int mealQuantity;
+	private int availability;
 	
 	public Meal(long mealId, String mealName, String mealContent,
 			String mealDescription, String mealType, int mealCategory,
 			String mealNote, String mealNutrients, String mealImageUrl,
 			String chefName, String chefImageUrl, long chefId, int spicyness,
-			int mealPrice, float rating, long totalMealsOrdered) {
+			int mealPrice, float rating) {
 		super();
 		this.mealId = mealId;
 		this.mealName = mealName;
@@ -40,14 +43,16 @@ public class Meal {
 		this.spicyness = spicyness;
 		this.mealPrice = mealPrice;
 		this.rating = rating;
-		this.totalMealsOrdered = totalMealsOrdered;
 	}
-	public Meal(String mealName, String mealContent, String mealDescription,
-			String mealType, int mealCategory, String mealNote,
-			String mealNutrients, String mealImageUrl, String chefName,
-			String chefImageUrl, long chefId, int spicyness, int mealPrice,
-			float rating) {
+	
+	public Meal(long mealId, String mealName, String mealContent,
+			String mealDescription, String mealType, int mealCategory,
+			String mealNote, String mealNutrients, String mealImageUrl,
+			String chefName, String chefImageUrl, long chefId, int spicyness,
+			int mealPrice, float rating, String mealDate, int mealTime,
+			int mealQuantity, int availability) {
 		super();
+		this.mealId = mealId;
 		this.mealName = mealName;
 		this.mealContent = mealContent;
 		this.mealDescription = mealDescription;
@@ -62,8 +67,40 @@ public class Meal {
 		this.spicyness = spicyness;
 		this.mealPrice = mealPrice;
 		this.rating = rating;
+		this.mealDate = mealDate;
+		this.mealTime = mealTime;
+		this.mealQuantity = mealQuantity;
+		this.availability = availability;
 	}
+
 	
+	
+	public Meal(String mealName, String mealContent,
+			String mealDescription, String mealType, int mealCategory,
+			String mealNote, String mealNutrients, String mealImageUrl,
+			String chefName, String chefImageUrl, long chefId, int spicyness,
+			int mealPrice, float rating, String mealDate, int mealTime,
+			int mealQuantity, int availability) {
+		this.mealName = mealName;
+		this.mealContent = mealContent;
+		this.mealDescription = mealDescription;
+		this.mealType = mealType;
+		this.mealCategory = mealCategory;
+		this.mealNote = mealNote;
+		this.mealNutrients = mealNutrients;
+		this.mealImageUrl = mealImageUrl;
+		this.chefName = chefName;
+		this.chefImageUrl = chefImageUrl;
+		this.chefId = chefId;
+		this.spicyness = spicyness;
+		this.mealPrice = mealPrice;
+		this.rating = rating;
+		this.mealDate = mealDate;
+		this.mealTime = mealTime;
+		this.mealQuantity = mealQuantity;
+		this.availability = availability;
+	}
+
 	public long getMealId() {
 		return mealId;
 	}
@@ -154,10 +191,32 @@ public class Meal {
 	public void setRating(float rating) {
 		this.rating = rating;
 	}
-	public long getTotalMealsOrdered() {
-		return totalMealsOrdered;
+
+	public String getMealDate() {
+		return mealDate;
 	}
-	public void setTotalMealsOrdered(long totalMealsOrdered) {
-		this.totalMealsOrdered = totalMealsOrdered;
+	public void setMealDate(String mealDate) {
+		this.mealDate = mealDate;
 	}
+
+	public int getMealTime() {
+		return mealTime;
+	}
+
+	public void setMealTime(int mealTime) {
+		this.mealTime = mealTime;
+	}
+	public int getMealQuantity() {
+		return mealQuantity;
+	}
+	public void setMealQuantity(int mealQuantity) {
+		this.mealQuantity = mealQuantity;
+	}
+	public int getAvailability() {
+		return availability;
+	}
+	public void setAvailability(int availability) {
+		this.availability = availability;
+	}
+	
 }

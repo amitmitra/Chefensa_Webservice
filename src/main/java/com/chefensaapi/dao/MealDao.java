@@ -5,7 +5,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.chefensaapi.models.Meal;
-import com.chefensaapi.models.Menu;
 
 public interface MealDao {
 	
@@ -15,10 +14,6 @@ public interface MealDao {
 	
 	public Meal getMealWithId(long mealId);
 	
-	public List<Menu> getMealAvailability(String date);
-	
 	public long addMealInfo(Meal meal);
-	
-	public void addMenuInfo(Menu menu);
 	
 }

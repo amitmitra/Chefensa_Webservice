@@ -27,6 +27,8 @@ public class JdbcOrderDao implements OrderDao {
 	public final String ORDER_TIME="orderTime";
 	public final String MEAL_QUANTITY="mealQuantity";
 	public final String STATUS="status";
+	public final String RATING="rating";
+	public final String PANIC_BUTTON_PRESSED="panicButtonPressed";
 	
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;	
@@ -85,7 +87,7 @@ public class JdbcOrderDao implements OrderDao {
 					rs.getLong(CUSTOMER_ID), rs.getLong(ADDRESS_ID),
 					rs.getString(ORDER_DATE), rs.getString(ORDER_TIME),
 					rs.getString(MEAL_ID), rs.getString(MEAL_QUANTITY),
-					rs.getInt(STATUS));
+					rs.getInt(STATUS), rs.getFloat(RATING), rs.getInt(PANIC_BUTTON_PRESSED));
 			return order;
 		}
 	}

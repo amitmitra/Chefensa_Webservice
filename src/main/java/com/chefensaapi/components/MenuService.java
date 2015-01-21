@@ -1,5 +1,6 @@
 package com.chefensaapi.components;
 
+import java.awt.Menu;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -9,10 +10,8 @@ import org.springframework.stereotype.Component;
 import com.chefensaapi.components.interfaces.IMenuService;
 import com.chefensaapi.dao.ChefDao;
 import com.chefensaapi.dao.MealDao;
-import com.chefensaapi.details.MealDetail;
 import com.chefensaapi.models.Chef;
 import com.chefensaapi.models.Meal;
-import com.chefensaapi.models.Menu;
 
 @Component
 public class MenuService implements IMenuService {
@@ -21,7 +20,7 @@ public class MenuService implements IMenuService {
 	MealDao mealDao = (MealDao)context.getBean("mealDao");
 	ChefDao chefDao = (ChefDao)context.getBean("chefDao");
 	
-	public void addMeal(MealDetail mealDetail) {
+	public void addMeal(Meal mealDetail) {
 
 		Chef chef = chefDao.getChefInfo(mealDetail.getChefId());
 
@@ -32,13 +31,10 @@ public class MenuService implements IMenuService {
 				mealDetail.getMealImageUrl(), chef.getName(),
 				chef.getImageUrl(), mealDetail.getChefId(),
 				mealDetail.getSpicyness(), mealDetail.getMealPrice(),
-				mealDetail.getRating());
-		long mealId = mealDao.addMealInfo(meal);
-
-		Menu menu = new Menu(mealId, mealDetail.getMealDate(),
+				mealDetail.getRating(), mealDetail.getMealDate(),
 				mealDetail.getMealTime(), mealDetail.getMealQuantity(),
 				mealDetail.getAvailability());
-		mealDao.addMenuInfo(menu);
+
 	}
 
 	public List<Meal> getMenuForDay(String date) {

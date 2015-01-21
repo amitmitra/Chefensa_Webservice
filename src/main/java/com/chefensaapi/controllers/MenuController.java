@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chefensaapi.components.interfaces.IMenuService;
-import com.chefensaapi.details.MealDetail;
 import com.chefensaapi.models.Meal;
 
 
@@ -34,7 +33,7 @@ public class MenuController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public void createMeal(@RequestBody final MealDetail entity){
+	public void createMeal(@RequestBody final Meal entity){
 		menuService.addMeal(entity);
 	}
 }

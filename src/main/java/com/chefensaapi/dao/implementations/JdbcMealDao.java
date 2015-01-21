@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.chefensaapi.dao.MealDao;
 import com.chefensaapi.models.Meal;
-import com.chefensaapi.models.Menu;
 
 public class JdbcMealDao implements MealDao {
 
@@ -35,13 +34,11 @@ public class JdbcMealDao implements MealDao {
 	public final String MEAL_PRICE = "mealPrice";
 	public final String MEAL_RATING = "rating";
 	public final String MEAL_TOTAL_ORDERED = "totalMealsOrdered";
-
-	public final String MENU_TABLE = "menu";
-	public final String MENU_MEAL_ID = "mealId";
-	public final String MENU_MEAL_DATE = "mealDate";
-	public final String MENU_MEAL_TIME = "mealTime";
-	public final String MENU_MEAL_QUANTIRY = "mealQuantity";
-	public final String MENU_AVAILABILITY = "availability";
+	
+	public final String MEAL_DATE = "mealDate";
+	public final String MEAL_TIME = "mealTime";
+	public final String MEAL_QUANTIRY = "mealQuantity";
+	public final String MEAL_AVAILABILITY = "availability";
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -56,6 +53,8 @@ public class JdbcMealDao implements MealDao {
 				+ MEAL_NUTRIENTS + ", " + MEAL_IMAGE_URL + ", "
 				+ MEAL_CHEF_NAME + ", " + MEAL_CHEF_IMAGE_URL + ", "
 				+ MEAL_CHEF_ID + ", " + MEAL_SPICINESS + ", " + MEAL_PRICE
+				+ MEAL_DATE + ", " + MEAL_TIME + ", " + MEAL_QUANTIRY + ", "
+				+ MEAL_AVAILABILITY + ", "
 				+ ") values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		Object[] params = new Object[] { meal.getMealName(),
@@ -70,26 +69,10 @@ public class JdbcMealDao implements MealDao {
 		return jdbcTemplate.queryForLong("SELECT max(" + MEAL_ID + ") from " + MEAL_TABLE);
 	}
 
-	public void addMenuInfo(Menu menu) {
-
-		String insetQuery = "insert into " + MENU_TABLE + "(" + MENU_MEAL_ID
-				+ ", " + MENU_MEAL_DATE + ", " + MENU_MEAL_TIME + ", "
-				+ MENU_MEAL_QUANTIRY + ", " + MENU_AVAILABILITY
-				+ ") values (?,?,?,?,?)";
-		Object[] params = new Object[] { menu.getMealId(), menu.getMealDate(),
-				menu.getMealTime(), menu.getMealQuantity(),
-				menu.getAvailability() };
-
-		jdbcTemplate.update(insetQuery, params);
-	}
-
 	public List<Meal> getMealOnDate(String date) {
-		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_ID
-				+ " in (select " + MENU_MEAL_ID + " from " + MENU_TABLE
-				+ " where " + MENU_MEAL_DATE + " = ?";
+		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_DATE + " = ?";
 
-		List<Meal> mealList = jdbcTemplate.query(sql, new Object[] { date },
-				new MealRowMapper());
+		List<Meal> mealList = jdbcTemplate.query(sql, new Object[] { date }, new MealRowMapper());
 
 		return mealList;
 	}
@@ -101,15 +84,6 @@ public class JdbcMealDao implements MealDao {
 		return meal;
 	}
 
-	@Override
-	public List<Menu> getMealAvailability(String date) {
-		String sql = "select * from " + MENU_TABLE + " where " + MENU_MEAL_DATE
-				+ " = ?";
-		List<Menu> mealAvailabilityList = jdbcTemplate.query(sql,
-				new Object[] { date }, new MenuRowMapper());
-		return mealAvailabilityList;
-	}
-
 	public class MealRowMapper implements RowMapper<Meal> {
 		public Meal mapRow(ResultSet rs, int arg1) throws SQLException {
 			Meal meal = new Meal(rs.getLong(MEAL_ID), rs.getString(MEAL_NAME),
@@ -119,19 +93,9 @@ public class JdbcMealDao implements MealDao {
 					rs.getString(MEAL_IMAGE_URL), rs.getString(MEAL_CHEF_NAME),
 					rs.getString(MEAL_CHEF_IMAGE_URL),
 					rs.getLong(MEAL_CHEF_ID), rs.getInt(MEAL_SPICINESS),
-					rs.getInt(MEAL_PRICE), rs.getFloat(MEAL_RATING),
-					rs.getLong(MEAL_TOTAL_ORDERED));
+					rs.getInt(MEAL_PRICE), rs.getFloat(MEAL_RATING), rs.getString(MEAL_DATE), rs.getInt(MEAL_TIME), rs.getInt(MEAL_QUANTIRY),
+					rs.getInt(MEAL_AVAILABILITY));
 			return meal;
-		}
-	}
-
-	public class MenuRowMapper implements RowMapper<Menu> {
-		@Override
-		public Menu mapRow(ResultSet rs, int arg1) throws SQLException {
-			Menu menu = new Menu(rs.getLong(MENU_MEAL_ID),
-					rs.getString(MENU_MEAL_DATE), rs.getString(MENU_MEAL_TIME),
-					rs.getInt(MENU_MEAL_QUANTIRY), rs.getInt(MENU_AVAILABILITY));
-			return menu;
 		}
 	}
 
