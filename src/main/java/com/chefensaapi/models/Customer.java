@@ -12,12 +12,16 @@ public class Customer {
 	private long totalHitsOnApp;
 	private long noOfTImesOrdered;
 	private long timesStayingMoreThan2Mins;
+	private String gcmId;
+	
+	public Customer(){
+		
+	}
 	
 	public Customer(long id, String deviceId, String customerName,
 			String primaryPhone, String secondaryPhone, String primaryEmail,
 			String secondaryEmail, long totalHitsOnApp, long noOfTImesOrdered,
 			long timesStayingMoreThan2Mins) {
-		super();
 		this.id = id;
 		this.deviceId = deviceId;
 		this.customerName = customerName;
@@ -34,7 +38,6 @@ public class Customer {
 			String secondaryPhone, String primaryEmail, String secondaryEmail,
 			long totalHitsOnApp, long noOfTImesOrdered,
 			long timesStayingMoreThan2Mins) {
-		super();
 		this.deviceId = deviceId;
 		this.customerName = customerName;
 		this.primaryPhone = primaryPhone;
@@ -124,5 +127,13 @@ public class Customer {
 
 	public void setTimesStayingMoreThan2Mins(long timesStayingMoreThan2Mins) {
 		this.timesStayingMoreThan2Mins = timesStayingMoreThan2Mins;
+	}
+
+	public String getGcmId() {
+		return gcmId;
+	}
+
+	public void setGcmId(String gcmId) {
+		this.gcmId = gcmId;
 	}
 }

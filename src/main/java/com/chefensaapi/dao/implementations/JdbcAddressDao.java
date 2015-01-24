@@ -43,13 +43,12 @@ public class JdbcAddressDao implements AddressDao{
 				+ ADDRESS_COUNTRY + ", " + ADDRESS_STATE + ", " + ADDRESS_CITY
 				+ ", " + ADDRESS_LOCALITY + ", " + ADDRESS_STREET_NAME 
 				+ " , " + ADDRESS_BUILDING_NAME + " , " + ADDRESS_FLAT_NUMBER
-				+ " , "+ ADDRESS_PIN + ", " + ADDRESS_LANDMARK + ", "
-				+ ADDRESS_COORDINATES + ") values (?,?,?,?,?,?,?,?)";
+				+ " , "+ ADDRESS_PIN + ", " + ADDRESS_LANDMARK + ") values (?,?,?,?,?,?,?,?, ?)";
 
 		final Object[] params = new Object[] { address.getCountry(),
 				address.getState(), address.getCity(), address.getLocality(), address.getStreetName(),
 				address.getBuildingName(), address.getFlatNumber(), address.getPin(),
-				address.getLandmark(), address.getCoordinates() };
+				address.getLandmark()};
 
 		jdbcTemplate.update(query, params);
 		Long id = jdbcTemplate.queryForLong("SELECT max(id) from " + TABLE_ADDRESS);

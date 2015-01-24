@@ -6,7 +6,7 @@ public interface ICustomerService {
 
 	public Customer getCustomerCompleteDetail(long customerId);
 
-	public int createCustomerEntry(Customer entity);
+	public long createCustomerEntry(Customer entity);
 	
 	public int updateRecentAddress(long customerId ,String address, long phoneNumber);
 }

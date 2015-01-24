@@ -43,10 +43,10 @@ public class CustomerController {
 		return customer;
 	}
 	
-	@RequestMapping(value = "create", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/create", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
-    public int create(@RequestBody final Customer entity) {
+    public long create(@RequestBody final Customer entity) {
 		return customerService.createCustomerEntry(entity);
     }
 }

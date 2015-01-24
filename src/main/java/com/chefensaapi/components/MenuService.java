@@ -2,6 +2,7 @@ package com.chefensaapi.components;
 
 import java.awt.Menu;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -34,10 +35,16 @@ public class MenuService implements IMenuService {
 				mealDetail.getRating(), mealDetail.getMealDate(),
 				mealDetail.getMealTime(), mealDetail.getMealQuantity(),
 				mealDetail.getAvailability());
+		mealDao.addMealInfo(meal);
 
 	}
 
 	public List<Meal> getMenuForDay(String date) {
 		return mealDao.getMealOnDate(date);
 	}
+
+	public Map<Long, Integer> getMealAvailability(String date) {
+		return mealDao.getMealAvailability(date);
+	}
+	
 }

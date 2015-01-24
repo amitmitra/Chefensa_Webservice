@@ -2,7 +2,10 @@ package com.chefensaapi.dao.implementations;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -47,22 +50,44 @@ public class JdbcMealDao implements MealDao {
 
 	public long addMealInfo(Meal meal) {
 
-		String insertQuery = "insert into " + MEAL_TABLE + "(" + MEAL_NAME
-				+ ", " + MEAL_CONTENT + ", " + MEAL_DESCRIPTION + ", "
-				+ MEAL_TYPE + ", " + MEAL_CATEGORY + ", " + MEAL_NOTE + ", "
-				+ MEAL_NUTRIENTS + ", " + MEAL_IMAGE_URL + ", "
-				+ MEAL_CHEF_NAME + ", " + MEAL_CHEF_IMAGE_URL + ", "
-				+ MEAL_CHEF_ID + ", " + MEAL_SPICINESS + ", " + MEAL_PRICE
-				+ MEAL_DATE + ", " + MEAL_TIME + ", " + MEAL_QUANTIRY + ", "
-				+ MEAL_AVAILABILITY + ", "
-				+ ") values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "insert into " + MEAL_TABLE 
+				+ "(" + MEAL_NAME
+				+ ", " + MEAL_CONTENT 
+				+ ", " + MEAL_DESCRIPTION
+				+ ", " + MEAL_TYPE
+				+ ", " + MEAL_CATEGORY 
+				+ ", " + MEAL_NOTE 
+				+ ", " + MEAL_NUTRIENTS 
+				+ ", " + MEAL_IMAGE_URL 
+				+ ", "+ MEAL_CHEF_NAME 
+				+ ", " + MEAL_CHEF_IMAGE_URL 
+				+ ", " + MEAL_CHEF_ID 
+				+ ", " + MEAL_SPICINESS
+				+ ", " + MEAL_PRICE 
+				+ ", " + MEAL_DATE
+				+ ", " + MEAL_TIME
+				+ ", " + MEAL_QUANTIRY
+				+ ", "+ MEAL_AVAILABILITY
+				+ ") values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-		Object[] params = new Object[] { meal.getMealName(),
-				meal.getMealContent(), meal.getMealDescription(),
-				meal.getMealType(), meal.getMealCategory(), meal.getMealNote(),
-				meal.getMealNutrients(), meal.getMealImageUrl(),
-				meal.getChefName(), meal.getChefImageUrl(), meal.getChefId(),
-				meal.getSpicyness(), meal.getMealPrice() };
+		Object[] params = new Object[] {
+				meal.getMealName(),
+				meal.getMealContent(),
+				meal.getMealDescription(),
+				meal.getMealType(),
+				meal.getMealCategory(),
+				meal.getMealNote(),
+				meal.getMealNutrients(),
+				meal.getMealImageUrl(),
+				meal.getChefName(),
+				meal.getChefImageUrl(), 
+				meal.getChefId(),
+				meal.getSpicyness(), 
+				meal.getMealPrice(),
+				meal.getMealDate(),
+				meal.getMealTime(),
+				meal.getMealQuantity(),
+				meal.getAvailability() };
 
 		jdbcTemplate.update(insertQuery, params);
 
@@ -72,16 +97,35 @@ public class JdbcMealDao implements MealDao {
 	public List<Meal> getMealOnDate(String date) {
 		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_DATE + " = ?";
 
-		List<Meal> mealList = jdbcTemplate.query(sql, new Object[] { date }, new MealRowMapper());
+		List<Meal> mealList = jdbcTemplate.query(sql, new Object[] { date },
+				new MealRowMapper());
 
 		return mealList;
 	}
 
 	public Meal getMealWithId(long mealId) {
-		String sql = "select * from Meal where " + MEAL_ID + " =?";
+		String sql = "select * from " +  MEAL_TABLE + " where " + MEAL_ID + " =?";
 		Meal meal = jdbcTemplate.queryForObject(sql, new Object[] { mealId },
 				new MealRowMapper());
 		return meal;
+	}
+
+	
+	public Map<Long,Integer> getMealAvailability(String date) {
+		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_DATE
+				+ " = ?";
+		List<Meal> mealAvailabilityList = jdbcTemplate.query(sql,
+				new Object[] { date }, new MealRowMapper());
+		Map<Long, Integer> mealCountMap=new HashMap<Long, Integer>();
+		if(mealAvailabilityList!=null && !mealAvailabilityList.isEmpty()){
+			Iterator itr = mealAvailabilityList.iterator();
+		      while(itr.hasNext()) {
+		         Meal meal = (Meal) itr.next();
+		         mealCountMap.put(meal.getMealId(), meal.getAvailability());
+		      }
+		}
+		
+		return mealCountMap;
 	}
 
 	public class MealRowMapper implements RowMapper<Meal> {

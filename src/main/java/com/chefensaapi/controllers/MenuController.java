@@ -1,6 +1,7 @@
 package com.chefensaapi.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,4 +37,11 @@ public class MenuController {
 	public void createMeal(@RequestBody final Meal entity){
 		menuService.addMeal(entity);
 	}
+	
+	@RequestMapping("/menuList/mealCount")
+	public Map<Long,Integer> getMealAvailability(@RequestParam(value="date",required=false,defaultValue="-1") String date){
+		Map<Long,Integer> menu = menuService.getMealAvailability(date);
+		return menu;
+	}
+
 }

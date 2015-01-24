@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+	<bean id="customerDao" class="com.chefensaapi.dao.implementations.JdbcCustomerDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+ 
+	<bean id="mealDao" class="com.chefensaapi.dao.implementations.JdbcMealDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+ 
+	<bean id="chefDao" class="com.chefensaapi.dao.implementations.JdbcChefDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<bean id="orderDao" class="com.chefensaapi.dao.implementations.JdbcOrderDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+ 
+	<bean id="addressDao" class="com.chefensaapi.dao.implementations.JdbcAddressDao">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+ 
+</beans>

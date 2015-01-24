@@ -29,7 +29,7 @@ public class ChefController {
 			@RequestParam(value = "id", required = false, defaultValue = "-1") long chefId) {
 		Chef chef;
 		chef = chefService.getChefDetail(chefId);
-		return null;
+		return chef;
 	}
 	
 	@RequestMapping(value = "/allchefs", produces = MediaType.APPLICATION_JSON_VALUE)

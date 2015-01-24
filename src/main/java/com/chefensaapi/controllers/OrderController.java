@@ -15,7 +15,7 @@ import com.chefensaapi.models.Customer;
 import com.chefensaapi.models.Order;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("/order")
 public class OrderController {
 	@Autowired
 	private IOrderService orderService;

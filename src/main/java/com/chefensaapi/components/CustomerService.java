@@ -18,7 +18,7 @@ public class CustomerService implements ICustomerService {
 		return customerDao.getCustomerInfo(customerId);
 	}
 
-	public int createCustomerEntry(Customer entity) {
+	public long createCustomerEntry(Customer entity) {
 		ApplicationContext context = 
 	    		new ClassPathXmlApplicationContext("Spring-Module.xml");
 		CustomerDao customerDao= (CustomerDao) context.getBean("customerDao");

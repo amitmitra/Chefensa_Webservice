@@ -27,15 +27,16 @@ public class JdbcCustomerDao implements CustomerDao {
 	public final String CUSTOMER_TOTAL_HITS_ON_APP = "totalHitsOnApp";
 	public final String CUSTOMER_TOTAL_ORDERS = "noOfTImesOrdered";
 	public final String CUSTOMER_STAYING_MORE_THAN_2_MIN_COUNT = "timesStayingMoreThan2Mins";
+	public final String CUSTOMER_GCM_ID = "gcmId";
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public int create(Customer customer) {
+	public long create(Customer customer) {
 
-		String INSERT_SQL = "insert into" + TABLE_CUSTOMER + "("
+		String INSERT_SQL = "insert into " + TABLE_CUSTOMER + "("
 				+ CUSTOMER_DEVICEID + ", " + CUSTOMER_NAME + ", "
 				+ CUSTOMER_PRIMARY_PHONE + ", " + CUSTOMER_SECONDARY_PHONE
 				+ ", " + CUSTOMER_PRIMARY_EMAIL + ", "
@@ -52,10 +53,17 @@ public class JdbcCustomerDao implements CustomerDao {
 				customer.getTimesStayingMoreThan2Mins() };
 
 		int response = jdbcTemplate.update(INSERT_SQL, params);
+		
+		Customer cust=jdbcTemplate.queryForObject("select max(id) from customer",null,new CustomerMapper());
+		long id=-1;
+		if(cust!=null){
+			id=cust.getId();
+		}
+	
 		System.out.println("Inserted into Customer Table Successfully");
-		return response;
+		return id;
 	}
-
+	
 	public Customer getCustomerInfo(long customerId) {
 		Customer customer = null;
 		String queryCustomer = "select * from Customer where " + CUSTOMER_ID
