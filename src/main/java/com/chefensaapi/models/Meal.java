@@ -22,6 +22,10 @@ public class Meal {
 	private int mealQuantity;
 	private int availability;
 	
+	public Meal(){
+		
+	}
+	
 	public Meal(long mealId, String mealName, String mealContent,
 			String mealDescription, String mealType, int mealCategory,
 			String mealNote, String mealNutrients, String mealImageUrl,

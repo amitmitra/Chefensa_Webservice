@@ -1,7 +1,6 @@
 package com.chefensaapi.controllers;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +24,8 @@ public class MenuController {
 	private IMenuService menuService;
 	
 	@RequestMapping("/menuList")
-	public List<Meal> getMenu(@RequestParam(value="date",required=false,defaultValue="-1") String date){
-		List<Meal> menu = menuService.getMenuForDay(date);
+	public List<Meal> getMenu(){
+		List<Meal> menu = menuService.getMenuForDay();
 		return menu;
 	}
 	
@@ -39,9 +37,9 @@ public class MenuController {
 	}
 	
 	@RequestMapping("/menuList/mealCount")
-	public Map<Long,Integer> getMealAvailability(@RequestParam(value="date",required=false,defaultValue="-1") String date){
-		Map<Long,Integer> menu = menuService.getMealAvailability(date);
-		return menu;
+	public String getMealAvailability(){
+		String availability = menuService.getMealAvailability();
+		return availability;
 	}
 
 }

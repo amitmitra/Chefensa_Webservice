@@ -1,6 +1,6 @@
 package com.chefensaapi.components;
 
-import java.awt.Menu;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -39,12 +39,14 @@ public class MenuService implements IMenuService {
 
 	}
 
-	public List<Meal> getMenuForDay(String date) {
-		return mealDao.getMealOnDate(date);
+	public List<Meal> getMenuForDay() {
+		Calendar cal = Calendar.getInstance();
+		return mealDao.getMealOnDate(cal.get(Calendar.YEAR) + ":" +(cal.get(Calendar.MONTH )+1) + ":" + cal.get(Calendar.DATE));
 	}
 
-	public Map<Long, Integer> getMealAvailability(String date) {
-		return mealDao.getMealAvailability(date);
+	public String getMealAvailability() {
+		Calendar cal = Calendar.getInstance();
+		return mealDao.getMealAvailability(cal.get(Calendar.YEAR) + ":" +(cal.get(Calendar.MONTH )+1) + ":" + cal.get(Calendar.DATE));
 	}
 	
 }

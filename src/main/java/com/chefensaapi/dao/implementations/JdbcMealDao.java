@@ -2,10 +2,8 @@ package com.chefensaapi.dao.implementations;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -111,21 +109,28 @@ public class JdbcMealDao implements MealDao {
 	}
 
 	
-	public Map<Long,Integer> getMealAvailability(String date) {
+	public String getMealAvailability(String date) {
 		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_DATE
 				+ " = ?";
 		List<Meal> mealAvailabilityList = jdbcTemplate.query(sql,
 				new Object[] { date }, new MealRowMapper());
-		Map<Long, Integer> mealCountMap=new HashMap<Long, Integer>();
-		if(mealAvailabilityList!=null && !mealAvailabilityList.isEmpty()){
-			Iterator itr = mealAvailabilityList.iterator();
-		      while(itr.hasNext()) {
-		         Meal meal = (Meal) itr.next();
-		         mealCountMap.put(meal.getMealId(), meal.getAvailability());
-		      }
+		String responseString = "";
+		String str = "";
+		if (mealAvailabilityList != null && !mealAvailabilityList.isEmpty()) {
+			Iterator<Meal> itr = mealAvailabilityList.iterator();
+			while (itr.hasNext()) {
+				Meal meal = (Meal) itr.next();
+				responseString += meal.getMealId() + ":"
+						+ meal.getAvailability() + ",";
+			}
+			if (responseString.length() > 0
+					&& responseString.charAt(responseString.length() - 1) == ',') {
+				str = responseString.substring(0, responseString.length() - 1);
+			}
+
 		}
-		
-		return mealCountMap;
+
+		return str;
 	}
 
 	public class MealRowMapper implements RowMapper<Meal> {

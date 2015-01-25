@@ -15,7 +15,7 @@ public interface MealDao {
 	
 	public Meal getMealWithId(long mealId);
 	
-	public Map<Long,Integer> getMealAvailability(String date);
+	public String getMealAvailability(String date);
 	
 	public long addMealInfo(Meal meal);
 	
