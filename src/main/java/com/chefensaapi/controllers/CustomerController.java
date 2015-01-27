@@ -24,29 +24,19 @@ public class CustomerController {
 	public Customer getCustomerDetails(@RequestParam(value="id",required=false,defaultValue="-1") long customerId){
 		Customer customer;//= new Customer();
 		customer = customerService.getCustomerCompleteDetail(customerId);
-		/*customer.setCustomerName("harsh");
-		customer.setDeviceId("12345");
-		customer.setDateOfBirth("29/05/1991");
-		customer.setCuisinePreference("Indian");
-		customer.setGender("Male");
-		customer.setMealType("Veg");
-		customer.setPrimaryAddress("Flat 10");
-		customer.setSecondaryAddress("Flat 11");
-		customer.setPrimaryPhoneNo("12345");
-		customer.setSecondaryPhoneNo("12345");
-		customer.setPrimaryEmailId("asdf");
-		customer.setSecondaryEmailId("gfdsa");
-		customer.setProfileImageUrl("jkkllsdskd");
-		customer.setSpicinessPreference("Very less");
-		customer.setTotalHitsOnApp(20);
-		customer.setTotalOrdersPlaced(30);*/
 		return customer;
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST ,consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus( HttpStatus.CREATED )
 	@ResponseBody
-    public long create(@RequestBody final Customer entity) {
-		return customerService.createCustomerEntry(entity);
+    public Customer create(@RequestBody final Customer entity) {
+		customerService.createCustomerEntry(entity);
+		return entity;
     }
+	
+	@RequestMapping(value = "/hit", method = RequestMethod.PUT)
+	public int increaseHitOnApp(@RequestParam(value = "deviceId", required = true, defaultValue = "") String deviceId){
+		return customerService.increaseHitsOnApp(deviceId);
+	}
 }

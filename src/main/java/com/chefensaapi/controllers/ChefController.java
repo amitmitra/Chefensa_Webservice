@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chefensaapi.components.interfaces.IChefService;
-import com.chefensaapi.details.ChefDetail;
 import com.chefensaapi.models.Chef;
 
 @RestController
@@ -33,14 +32,21 @@ public class ChefController {
 	}
 	
 	@RequestMapping(value = "/allchefs", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<ChefDetail> getChefsList(){
+	public List<Chef> getChefsList(){
 		return chefService.getAllChefs();
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public long createChef(@RequestBody final ChefDetail entity) {
+	public long createChef(@RequestBody final Chef entity) {
 		return chefService.addChefDetail(entity);
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public long updateChef(@RequestBody final Chef entity){
+		return chefService.updateChef(entity);
 	}
 }

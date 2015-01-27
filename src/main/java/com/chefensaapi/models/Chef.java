@@ -8,7 +8,7 @@ public class Chef {
 	private int gender;
 	private String phoneNumber;
 	private String email;
-	private long addressId;
+	private String address;
 	private String imageUrl;
 	private String description;
 	private String languages;
@@ -25,8 +25,12 @@ public class Chef {
 	private int experience;
 	private long createTime;
 	
+	public Chef(){
+		
+	}
+	
 	public Chef(long id, String name, int gender, String phoneNumber,
-			String email, long addressId, String imageUrl,
+			String email, String address, String imageUrl,
 			String description, String languages, int maritalStatus,
 			String ethnicity, int chefCategory, int mealCategory,
 			String workingDays, int workingTime, String mealTypes,
@@ -38,7 +42,7 @@ public class Chef {
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.addressId = addressId;
+		this.address = address;
 		this.imageUrl = imageUrl;
 		this.description = description;
 		this.languages = languages;
@@ -57,7 +61,7 @@ public class Chef {
 	}
 	
 	public Chef(String name, int gender, String phoneNumber,
-			String email, long addressId, String imageUrl,
+			String email, String address, String imageUrl,
 			String description, String languages, int maritalStatus,
 			String ethnicity, int chefCategory, int mealCategory,
 			String workingDays, int workingTime, String mealTypes,
@@ -67,7 +71,7 @@ public class Chef {
 		this.gender = gender;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
-		this.addressId = addressId;
+		this.address = address;
 		this.imageUrl = imageUrl;
 		this.description = description;
 		this.languages = languages;
@@ -112,11 +116,11 @@ public class Chef {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getAddressId() {
-		return addressId;
+	public String getAddress() {
+		return address;
 	}
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
+	public void setAddressId(String address) {
+		this.address = address;
 	}
 	public String getImageUrl() {
 		return imageUrl;

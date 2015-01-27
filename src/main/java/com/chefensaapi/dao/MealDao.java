@@ -1,7 +1,6 @@
 package com.chefensaapi.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -13,10 +12,14 @@ public interface MealDao {
 	
 	public List<Meal> getMealOnDate(String date);
 	
-	public Meal getMealWithId(long mealId);
+	public List<Meal> getAllMeals();
 	
 	public String getMealAvailability(String date);
 	
 	public long addMealInfo(Meal meal);
+	
+	public Meal getMeal(long mealId);
+	
+	public long updateMeal(Meal meal);
 	
 }

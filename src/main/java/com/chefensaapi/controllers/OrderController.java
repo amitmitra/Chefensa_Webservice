@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chefensaapi.components.interfaces.IOrderService;
-import com.chefensaapi.models.Customer;
 import com.chefensaapi.models.Order;
 
 @RestController

@@ -23,7 +23,7 @@ public class JdbcChefDao implements ChefDao {
 	public final String CHEF_GENDER="gender";
 	public final String CHEF_PHONE_NUMBER="phoneNumber";
 	public final String CHEF_EMAIL="email";
-	public final String ADDRESS_ID="addressId";
+	public final String CHEF_ADDRESS="address";
 	public final String CHEF_IMAGE_URL="imageUrl";
 	public final String CHEF_DESCRIPTION="description";
 	public final String CHEF_LANGUAGES="languages";
@@ -46,6 +46,21 @@ public class JdbcChefDao implements ChefDao {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 	
+	public long updateChef(Chef chef){
+		
+		String sql = "update " + TABLE_CHEF + " set " + CHEF_NAME + " = '" + chef.getName() + "', "
+				+ CHEF_PHONE_NUMBER + " = '" + chef.getPhoneNumber() + "', "
+				+ CHEF_EMAIL + " = '" + chef.getEmail() + "', "
+				+ CHEF_ADDRESS + " = '" + chef.getAddress() + "', "
+				+ CHEF_WORKING_DAYS + " = '" + chef.getWorkingDays() + "', "
+				+ CHEF_WORKING_TIME + " = " + chef.getWorkingTime() + ", "
+				+ CHEF_SPECIALITY + "= '" + chef.getSpeciality() + "', "
+				+ CHEF_CAPACITY + " = " + chef.getCapacity()
+				+ " where " + CHEF_ID + " = " + chef.getId();
+		
+		return jdbcTemplate.update(sql);
+	}
+	
 	public List<Chef> getChefsList(){
 		String query = "select * from " + TABLE_CHEF;
 		List<Chef> chefs = jdbcTemplate.query(query, new ChefMapper());
@@ -63,7 +78,7 @@ public class JdbcChefDao implements ChefDao {
 	public long addChefInfo(Chef chef) {
 		String insertQuery = "insert into " + TABLE_CHEF + " ("
 				+ CHEF_NAME + ", " + CHEF_GENDER + ", " + CHEF_PHONE_NUMBER
-				+ ", " + CHEF_EMAIL + ", " + ADDRESS_ID + ", " + CHEF_IMAGE_URL
+				+ ", " + CHEF_EMAIL + ", " + CHEF_ADDRESS + ", " + CHEF_IMAGE_URL
 				+ ", " + CHEF_DESCRIPTION + ", " + CHEF_LANGUAGES + ", "
 				+ CHEF_MARITAL_STATUS + ", " + CHEF_ETHNICITY + ", "
 				+ CHEF_CATEGORY + ", " + CHEF_MEAL_CATEGORY + ", "
@@ -74,7 +89,7 @@ public class JdbcChefDao implements ChefDao {
 		// define query arguments
 		final Object[] params = new Object[] {chef.getName(),
 				chef.getGender(), chef.getPhoneNumber(), chef.getEmail(),
-				chef.getAddressId(), chef.getImageUrl(),
+				chef.getAddress(), chef.getImageUrl(),
 				chef.getDescription(), chef.getLanguages(),
 				chef.getMaritalStatus(), chef.getEthnicity(),
 				chef.getChefCategory(), chef.getMealCategory(),
@@ -93,7 +108,7 @@ public class JdbcChefDao implements ChefDao {
 
 		public Chef mapRow(ResultSet rs, int arg1) throws SQLException {
 			Chef chef = new Chef(rs.getLong(CHEF_ID), rs.getString(CHEF_NAME), rs.getInt(CHEF_GENDER), rs.getString(CHEF_PHONE_NUMBER),
-					rs.getString(CHEF_EMAIL), rs.getLong(ADDRESS_ID), rs.getString(CHEF_IMAGE_URL), rs.getString(CHEF_DESCRIPTION), 
+					rs.getString(CHEF_EMAIL), rs.getString(CHEF_ADDRESS), rs.getString(CHEF_IMAGE_URL), rs.getString(CHEF_DESCRIPTION), 
 					rs.getString(CHEF_LANGUAGES), rs.getInt(CHEF_MARITAL_STATUS), rs.getString(CHEF_ETHNICITY), rs.getInt(CHEF_CATEGORY),
 					rs.getInt(CHEF_MEAL_CATEGORY), rs.getString(CHEF_WORKING_DAYS), rs.getInt(CHEF_WORKING_TIME), 
 					rs.getString(CHEF_MEAL_TYPES), rs.getString(CHEF_SPECIALITY), rs.getString(CHEF_RATING), rs.getInt(CHEF_CAPACITY),

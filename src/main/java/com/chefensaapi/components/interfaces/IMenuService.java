@@ -11,4 +11,10 @@ public interface IMenuService {
 	public List<Meal> getMenuForDay();
 	
 	public String getMealAvailability();
+	
+	public Meal getMeal(long mealId);
+	
+	public List<Meal> getAllMeals();
+	
+	public long updateMeal(Meal meal);
 }

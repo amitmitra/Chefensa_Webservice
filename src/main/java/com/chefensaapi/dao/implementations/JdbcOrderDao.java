@@ -18,16 +18,19 @@ public class JdbcOrderDao implements OrderDao {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplate;
 	
-	public final String TABLE_ORDER="order";
-	public final String ORDER_ID="orderId";
-	public final String CUSTOMER_ID="customerId";
+	public final String TABLE_ORDER="order_table";
+	public final String ORDER_ID="id";
+	public final String DEVICE_ID="deviceId";
 	public final String MEAL_ID="mealId";
-	public final String ADDRESS_ID="addressId";
-	public final String ORDER_DATE="orderDate";
-	public final String ORDER_TIME="orderTime";
-	public final String MEAL_QUANTITY="mealQuantity";
-	public final String STATUS="status";
-	public final String RATING="rating";
+	public final String ORDER_DATE_TIME="dateTime";
+	public final String MEAL_COUNT="mealCount";
+	public final String TOTAL_PRICE="totalPrice";
+	public final String ORDER_STATUS="status";
+	public final String ORDER_ADDRESS="address";
+	public final String CUSTOMER_NAME="customerName";
+	public final String PHONE_NUMBER="phoneNumber";
+	public final String CUSTOMER_EMAIL="customerEmail";
+	public final String ORDER_PAYMENT_TYPE="orderPaymentType";
 	public final String PANIC_BUTTON_PRESSED="panicButtonPressed";
 	
 	public void setDataSource(DataSource dataSource) {
@@ -37,25 +40,31 @@ public class JdbcOrderDao implements OrderDao {
 	
 	public int createOrder(Order order) {
 		
-	final String INSERT_SQL = "insert into" + TABLE_ORDER +  "(" +
-				ORDER_ID + ", " +
-				CUSTOMER_ID + ", " +
+	final String INSERT_SQL = "insert into " + TABLE_ORDER +  "(" +
+				DEVICE_ID + "," +
 				MEAL_ID + ", " +
-				ADDRESS_ID + ", " +
-				ORDER_DATE + ", " +
-				ORDER_TIME + ", " +
-				MEAL_QUANTITY + ", " + 
-				STATUS + ",) values ( ? , ? , ? , ? , ? , ? , ? , ? )";
+				ORDER_DATE_TIME + ", " +
+				MEAL_COUNT + ", " +
+				TOTAL_PRICE + ", " +
+				ORDER_STATUS + ", " +
+				ORDER_ADDRESS + ", " +
+				CUSTOMER_NAME + ", " +
+				PHONE_NUMBER + ", " +
+				CUSTOMER_EMAIL + ", " + 
+				ORDER_PAYMENT_TYPE + ") values ( ? , ? , ? , ? , ? , ? , ? , ?, ?, ?, ?)";
 		
 		Object[] params = new Object[]{
-				order.getOrderId(),
-				order.getCustomerId(),
+				order.getDeviceId(),
 				order.getMealId(),
-				order.getAddressId(),
-				order.getOrderDate(),
-				order.getOrderTime(),
-				order.getMealQuantity(),
-				order.getStatus()
+				order.getDateTime(),
+				order.getMealCount(),
+				order.getTotalPrice(),
+				order.getStatus(),
+				order.getAddress(),
+				order.getCustomerName(),
+				order.getPhoneNumber(),
+				order.getCustomerEmail(),
+				order.getOrderPaymentType()
 		};
 		
 		int response = jdbcTemplate.update(INSERT_SQL, params);
@@ -63,31 +72,34 @@ public class JdbcOrderDao implements OrderDao {
 	}
 
 	@Override
-	public List<Order> getOrder(long customerId, String date) {
-		String sql = "select * from " + TABLE_ORDER + " where " + CUSTOMER_ID
-				+ " = ? and " + ORDER_DATE + " = ?";
-		List<Order> orders = jdbcTemplate.query(sql, new Object[] { customerId,
-				date }, new OrderRowMapper());
-		return orders;
+	public List<Order> getOrder(String phoneNumber, String date) {
+		/*String sql = "select * from " + TABLE_ORDER + " where " + PHONE_NUMBER
+				+ " = ? and " + ORDER_DATET + " = ?";
+		List<Order> orders = jdbcTemplate.query(sql, new Object[] { phoneNumber,
+				date }, new OrderRowMapper());*/
+		return null;
 	}
 
 	@Override
-	public Order getOrder(long customerId, String date, String time) {
-		String sql = "select * from " + TABLE_ORDER + " where " + CUSTOMER_ID
+	public Order getOrder(String phoneNumber, String date, String time) {
+		/*String sql = "select * from " + TABLE_ORDER + " where " + PHONE_NUMBER
 				+ " = ? and " + ORDER_DATE + " = ? and " + ORDER_TIME + " = ?";
 		Order order = jdbcTemplate.queryForObject(sql, new Object[] {
-				customerId, date }, new OrderRowMapper());
-		return order;
+				phoneNumber, date }, new OrderRowMapper());*/
+		return null;
 	}
 	
 	public class OrderRowMapper implements RowMapper<Order> {
 		@Override
 		public Order mapRow(ResultSet rs, int arg1) throws SQLException {
 			Order order = new Order(rs.getLong(ORDER_ID),
-					rs.getLong(CUSTOMER_ID), rs.getLong(ADDRESS_ID),
-					rs.getString(ORDER_DATE), rs.getString(ORDER_TIME),
-					rs.getString(MEAL_ID), rs.getString(MEAL_QUANTITY),
-					rs.getInt(STATUS), rs.getFloat(RATING), rs.getInt(PANIC_BUTTON_PRESSED));
+					rs.getString(DEVICE_ID), rs.getString(MEAL_ID),
+					rs.getLong(ORDER_DATE_TIME), rs.getString(MEAL_COUNT),
+					rs.getInt(TOTAL_PRICE), rs.getInt(ORDER_STATUS),
+					rs.getString(ORDER_ADDRESS), rs.getString(CUSTOMER_NAME),
+					rs.getLong(PHONE_NUMBER), rs.getString(CUSTOMER_EMAIL),
+					rs.getInt(ORDER_PAYMENT_TYPE),
+					rs.getInt(PANIC_BUTTON_PRESSED));
 			return order;
 		}
 	}

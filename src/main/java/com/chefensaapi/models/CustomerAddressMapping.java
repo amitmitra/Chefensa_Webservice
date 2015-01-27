@@ -2,22 +2,22 @@ package com.chefensaapi.models;
 
 public class CustomerAddressMapping {
 
-	private long customerId;
+	private long phoneNumber;
 	private long addressId;
 	private int priority;
 	
-	public CustomerAddressMapping(long customerId, long addressId, int priority) {
+	public CustomerAddressMapping(long phoneNumber, long addressId, int priority) {
 		super();
-		this.customerId = customerId;
+		this.phoneNumber = phoneNumber;
 		this.addressId = addressId;
 		this.priority = priority;
 	}
 	
 	public long getCustomerId() {
-		return customerId;
+		return phoneNumber;
 	}
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
+	public void setCustomerId(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public long getAddressId() {
 		return addressId;

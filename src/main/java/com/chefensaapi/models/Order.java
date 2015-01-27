@@ -1,98 +1,114 @@
 package com.chefensaapi.models;
 
 public class Order {
-
-	private long orderId;
-	private long customerId;
-	private long addressId;
-	private String orderDate;
-	private String orderTime;
-	private String mealId;
-	private String mealQuantity;
-	private int status;
-	private float rating;
-	private int panicButtonPressed;
 	
-	public Order(long orderId, long customerId, long addressId,
-			String orderDate, String orderTime, String mealId,
-			String mealQuantity, int status, float rating,
-			int panicButtonPressed) {
+	private long id;
+	private String deviceId;
+	private String mealId;
+	private long dateTime;
+	private String mealCount;
+	private int totalPrice;
+	private int status;
+	private String address;
+	private String customerName;
+	private long phoneNumber;
+	private String customerEmail;
+	private int orderPaymentType;
+	private int panicButtonPressed;
+
+	public Order() {
+
+	}
+
+	public Order(long id, String deviceId, String mealId, long dateTime,
+			String mealCount, int totalPrice, int status, String address,
+			String customerName, long phoneNumber, String customerEmail,
+			int orderPaymentType, int panicButtonPressed) {
 		super();
-		this.orderId = orderId;
-		this.customerId = customerId;
-		this.addressId = addressId;
-		this.orderDate = orderDate;
-		this.orderTime = orderTime;
+		this.id = id;
+		this.deviceId = deviceId;
 		this.mealId = mealId;
-		this.mealQuantity = mealQuantity;
+		this.dateTime = dateTime;
+		this.mealCount = mealCount;
+		this.totalPrice = totalPrice;
 		this.status = status;
-		this.rating = rating;
+		this.address = address;
+		this.customerName = customerName;
+		this.phoneNumber = phoneNumber;
+		this.customerEmail = customerEmail;
+		this.orderPaymentType = orderPaymentType;
 		this.panicButtonPressed = panicButtonPressed;
 	}
 
-	public Order(long orderId, long customerId, long addressId,
-			String orderDate, String orderTime, String mealId, String mealQuantity, int status) {
-		this.orderId = orderId;
-		this.customerId = customerId;
-		this.addressId = addressId;
-		this.orderDate = orderDate;
-		this.orderTime = orderTime;
+
+	public Order(long id, String mealId, long dateTime, String mealCount,
+			int totalPrice, int status, String address) {
+		super();
+		this.id = id;
 		this.mealId = mealId;
-		this.mealQuantity = mealQuantity;
+		this.dateTime = dateTime;
+		this.mealCount = mealCount;
+		this.totalPrice = totalPrice;
 		this.status = status;
+		this.address = address;
 	}
 
-	public Order(long customerId, long addressId,
-			String orderDate, String orderTime, String mealId, String mealQuantity, int status) {
-		this.customerId = customerId;
-		this.addressId = addressId;
-		this.orderDate = orderDate;
-		this.orderTime = orderTime;
-		this.mealId = mealId;
-		this.mealQuantity = mealQuantity;
-		this.status = status;
+	public String getDeviceId() {
+		return deviceId;
 	}
 
-	public long getOrderId() {
-		return orderId;
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
 	}
 
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
+	public String getAddress() {
+		return address;
 	}
 
-	public long getCustomerId() {
-		return customerId;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public long getAddressId() {
-		return addressId;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
-	public void setAddressId(long addressId) {
-		this.addressId = addressId;
+	public long getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public String getOrderDate() {
-		return orderDate;
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
-	public void setOrderDate(String orderDate) {
-		this.orderDate = orderDate;
+	public String getCustomerEmail() {
+		return customerEmail;
 	}
 
-	public String getOrderTime() {
-		return orderTime;
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 
-	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
+	public int getOrderType() {
+		return orderPaymentType;
 	}
-	
+
+	public void setOrderType(int orderType) {
+		this.orderPaymentType = orderType;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public String getMealId() {
 		return mealId;
 	}
@@ -101,12 +117,28 @@ public class Order {
 		this.mealId = mealId;
 	}
 
-	public String getMealQuantity() {
-		return mealQuantity;
+	public long getDateTime() {
+		return dateTime;
 	}
 
-	public void setMealQuantity(String mealQuantity) {
-		this.mealQuantity = mealQuantity;
+	public void setDateTime(long dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public String getMealCount() {
+		return mealCount;
+	}
+
+	public void setMealCount(String mealCount) {
+		this.mealCount = mealCount;
+	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 	public int getStatus() {
@@ -117,12 +149,12 @@ public class Order {
 		this.status = status;
 	}
 
-	public float getRating() {
-		return rating;
+	public int getOrderPaymentType() {
+		return orderPaymentType;
 	}
 
-	public void setRating(float rating) {
-		this.rating = rating;
+	public void setOrderPaymentType(int orderPaymentType) {
+		this.orderPaymentType = orderPaymentType;
 	}
 
 	public int getPanicButtonPressed() {

@@ -28,8 +28,7 @@ public class JdbcAddressDao implements AddressDao{
 	public final String ADDRESS_FLAT_NUMBER = "flatNumber";
 	public final String ADDRESS_PIN = "pin";
 	public final String ADDRESS_LANDMARK = "landmark";
-	private final String ADDRESS_COORDINATES = "coordinates"; 
-	private final String ADDRESS_PRIORITY = "priority";
+	private final String ADDRESS_COORDINATES = "coordinates";
 	
 	@Override
 	public void setDataSource(DataSource dataSource) {

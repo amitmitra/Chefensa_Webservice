@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,17 @@ public class MenuController {
 		return menu;
 	}
 	
+	@RequestMapping("/allMealsList")
+	public List<Meal> getAllMeals(){
+		List<Meal> menu = menuService.getAllMeals();
+		return menu;
+	}
+	
+	@RequestMapping(value = "/mealInfo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Meal getMeal(@RequestParam(value = "mealId", required = false, defaultValue = "-1") long mealId){
+		return menuService.getMeal(mealId);
+	}
+	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
@@ -40,6 +52,13 @@ public class MenuController {
 	public String getMealAvailability(){
 		String availability = menuService.getMealAvailability();
 		return availability;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody
+	public long updateMeal(@RequestBody final Meal entity){
+		return menuService.updateMeal(entity);
 	}
 
 }

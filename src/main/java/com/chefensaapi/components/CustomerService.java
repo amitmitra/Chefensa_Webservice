@@ -19,15 +19,25 @@ public class CustomerService implements ICustomerService {
 	}
 
 	public long createCustomerEntry(Customer entity) {
-		ApplicationContext context = 
-	    		new ClassPathXmlApplicationContext("Spring-Module.xml");
+		long customerId = 0;
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 		CustomerDao customerDao= (CustomerDao) context.getBean("customerDao");
-		customerDao.create(entity);
-		return 0;
+		if(!customerDao.customerExist(entity.getDeviceId())){
+			customerId = customerDao.create(entity);
+		} else {
+			customerId = customerDao.updateCustomer(entity.getDeviceId(), entity);
+			customerDao.increaseHitsCount(entity.getDeviceId());
+		}
+		return customerId;
 	}
 
 	public int updateRecentAddress(long customerId ,String address, long phoneNumber) {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public int increaseHitsOnApp(String deviceId){
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+		CustomerDao customerDao= (CustomerDao) context.getBean("customerDao");
+		return customerDao.increaseHitsCount(deviceId);
 	}
 }

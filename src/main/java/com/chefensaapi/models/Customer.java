@@ -5,8 +5,8 @@ public class Customer {
 	private long id;
 	private String deviceId;
 	private String customerName;
-	private String primaryPhone;
-	private String secondaryPhone;
+	private long primaryPhone;
+	private long secondaryPhone;
 	private String primaryEmail;
 	private String secondaryEmail;
 	private long totalHitsOnApp;
@@ -19,9 +19,9 @@ public class Customer {
 	}
 	
 	public Customer(long id, String deviceId, String customerName,
-			String primaryPhone, String secondaryPhone, String primaryEmail,
+			long primaryPhone, long secondaryPhone, String primaryEmail,
 			String secondaryEmail, long totalHitsOnApp, long noOfTImesOrdered,
-			long timesStayingMoreThan2Mins) {
+			long timesStayingMoreThan2Mins, String gcmId) {
 		this.id = id;
 		this.deviceId = deviceId;
 		this.customerName = customerName;
@@ -32,12 +32,13 @@ public class Customer {
 		this.totalHitsOnApp = totalHitsOnApp;
 		this.noOfTImesOrdered = noOfTImesOrdered;
 		this.timesStayingMoreThan2Mins = timesStayingMoreThan2Mins;
+		this.gcmId = gcmId;
 	}
 
-	public Customer(String deviceId, String customerName, String primaryPhone,
-			String secondaryPhone, String primaryEmail, String secondaryEmail,
+	public Customer(String deviceId, String customerName, long primaryPhone,
+			long secondaryPhone, String primaryEmail, String secondaryEmail,
 			long totalHitsOnApp, long noOfTImesOrdered,
-			long timesStayingMoreThan2Mins) {
+			long timesStayingMoreThan2Mins, String gcmId) {
 		this.deviceId = deviceId;
 		this.customerName = customerName;
 		this.primaryPhone = primaryPhone;
@@ -47,6 +48,7 @@ public class Customer {
 		this.totalHitsOnApp = totalHitsOnApp;
 		this.noOfTImesOrdered = noOfTImesOrdered;
 		this.timesStayingMoreThan2Mins = timesStayingMoreThan2Mins;
+		this.gcmId = gcmId;
 	}
 
 	public long getId() {
@@ -73,19 +75,19 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
-	public String getPrimaryPhone() {
+	public long getPrimaryPhone() {
 		return primaryPhone;
 	}
 
-	public void setPrimaryPhone(String primaryPhone) {
+	public void setPrimaryPhone(long primaryPhone) {
 		this.primaryPhone = primaryPhone;
 	}
 
-	public String getSecondaryPhone() {
+	public long getSecondaryPhone() {
 		return secondaryPhone;
 	}
 
-	public void setSecondaryPhone(String secondaryPhone) {
+	public void setSecondaryPhone(long secondaryPhone) {
 		this.secondaryPhone = secondaryPhone;
 	}
 

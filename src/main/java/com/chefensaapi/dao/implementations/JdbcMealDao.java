@@ -101,13 +101,6 @@ public class JdbcMealDao implements MealDao {
 		return mealList;
 	}
 
-	public Meal getMealWithId(long mealId) {
-		String sql = "select * from " +  MEAL_TABLE + " where " + MEAL_ID + " =?";
-		Meal meal = jdbcTemplate.queryForObject(sql, new Object[] { mealId },
-				new MealRowMapper());
-		return meal;
-	}
-
 	
 	public String getMealAvailability(String date) {
 		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_DATE
@@ -131,6 +124,35 @@ public class JdbcMealDao implements MealDao {
 		}
 
 		return str;
+	}
+	
+	public List<Meal> getAllMeals(){
+		String sql = "select * from " + MEAL_TABLE;
+
+		List<Meal> mealList = jdbcTemplate.query(sql, new MealRowMapper());
+
+		return mealList;
+	}
+	
+	public Meal getMeal(long mealId){
+		
+		String sql = "select * from " + MEAL_TABLE + " where " + MEAL_ID + " = " + mealId;
+		Meal meal = jdbcTemplate.queryForObject(sql, new MealRowMapper());
+		
+		return meal;
+	}
+	
+	public long updateMeal(Meal meal){
+		
+		String sql = "update " + MEAL_TABLE + " set " + MEAL_PRICE + " = " + meal.getMealPrice() + ", "
+				+ MEAL_DATE + " = '" + meal.getMealDate() + "', "
+				+ MEAL_TIME + " = " + meal.getMealTime() + ", "
+				+ MEAL_SPICINESS + " = " + meal.getSpicyness() + ", "
+				+ MEAL_QUANTIRY + " = " + meal.getMealQuantity() + ", "
+				+ MEAL_AVAILABILITY + " = " + meal.getAvailability()
+				+ " where " + MEAL_ID + " = " + meal.getMealId();
+		
+		return jdbcTemplate.update(sql);
 	}
 
 	public class MealRowMapper implements RowMapper<Meal> {

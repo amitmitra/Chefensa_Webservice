@@ -9,4 +9,6 @@ public interface ICustomerService {
 	public long createCustomerEntry(Customer entity);
 	
 	public int updateRecentAddress(long customerId ,String address, long phoneNumber);
+	
+	public int increaseHitsOnApp(String deviceId);
 }

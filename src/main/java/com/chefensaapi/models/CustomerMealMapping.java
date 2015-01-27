@@ -2,24 +2,24 @@ package com.chefensaapi.models;
 
 public class CustomerMealMapping {
 
-	private long customerId;
+	private long phoneNumber;
 	private long mealId;
 	private long hitsOnMeal;
 	private long noOfTimesOrdered;
 	private double rating;
 	private String review;
 	
-	public CustomerMealMapping(long customerId, long mealId) {
+	public CustomerMealMapping(long phoneNumber, long mealId) {
 		super();
-		this.customerId = customerId;
+		this.phoneNumber = phoneNumber;
 		this.mealId = mealId;
 	}
 	
-	public long getCustomerId() {
-		return customerId;
+	public long getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
+	public void setPhoneNumber(long phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public long getMealId() {
 		return mealId;

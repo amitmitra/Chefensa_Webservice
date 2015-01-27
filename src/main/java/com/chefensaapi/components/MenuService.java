@@ -43,10 +43,24 @@ public class MenuService implements IMenuService {
 		Calendar cal = Calendar.getInstance();
 		return mealDao.getMealOnDate(cal.get(Calendar.YEAR) + ":" +(cal.get(Calendar.MONTH )+1) + ":" + cal.get(Calendar.DATE));
 	}
+	
+	public List<Meal> getAllMeals(){
+		return mealDao.getAllMeals();
+	}
 
 	public String getMealAvailability() {
 		Calendar cal = Calendar.getInstance();
 		return mealDao.getMealAvailability(cal.get(Calendar.YEAR) + ":" +(cal.get(Calendar.MONTH )+1) + ":" + cal.get(Calendar.DATE));
+	}
+	
+	public Meal getMeal(long mealId){
+		Meal meal;
+		meal = mealDao.getMeal(mealId);
+		return meal;
+	}
+	
+	public long updateMeal(Meal meal){
+		return mealDao.updateMeal(meal);
 	}
 	
 }

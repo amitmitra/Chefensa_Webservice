@@ -15,5 +15,7 @@ public interface ChefDao {
 	public long addChefInfo(Chef chef);
 	
 	public List<Chef> getChefsList();
+	
+	public long updateChef(Chef chef);
 
 }
